@@ -1,0 +1,23 @@
+version: '2'
+services:
+  quickstart:
+    image: "datest:0.1"
+    ports:
+      - "8080:8080"
+    network_mode: "host"
+    depends_on:
+    - mongodb
+    volumes:
+      - "/home/ivan/scalaprojects/datest/src/main/resources/:/opt/datestConfig/:ro"
+
+  mongodb:
+    image: "mongo:3.6.3"
+    ports:
+      - "27017:27017"
+    volumes:
+      - "mongodb:/data/db"
+    restart: "always"
+
+volumes:
+  mongodb:
+    driver: "local"
